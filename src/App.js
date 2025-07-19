@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
+import { log, init, tracedEvent } from 'trace-ai-sdk/frontend';
 
 function App() {
+
+  useEffect(() => {
+    init({
+      apiKey: "x-api-key",
+      appName: "trace-ai-react-app",
+    });
+    return () => {
+      console.log('App component unmounted');
+    };
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => { tracedEvent("user-clicked-payment", () => { log.info('Payment button clicked'); 
+         log.info('Payment made');
+
+      }) }}>Pay now</button>
     </div>
   );
 }
