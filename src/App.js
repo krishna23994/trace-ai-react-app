@@ -8,6 +8,7 @@ function App() {
     init({
       apiKey: "x-api-key",
       appName: "trace-ai-react-app",
+      pushForLogLevel: ["info", "error", "debug"],
     });
     return () => {
       console.log('App component unmounted');
@@ -16,7 +17,7 @@ function App() {
 
   const anotherTracedEvent = (data) => {
     tracedEvent(data,async ({params,traceInfo}) => { 
-         log.info('Pay now button clicked with params in anotherTracedEvent', params);
+         log.debug('Pay now button clicked with params in anotherTracedEvent', params);
 
         throw new Error('Simulated error for testing'); // Simulating an error
       },async ({error,traceInfo})=>{
