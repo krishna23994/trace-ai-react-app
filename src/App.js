@@ -30,11 +30,13 @@ function App() {
     tracedEvent({test: "data"},async ({params,traceInfo}) => { 
       log.info('Pay now button clicked with params in handleClick', params);
 
+      await fetch("http://localhost:8080/posts/1")
+
       anotherTracedEvent(params);
       
     },async ({error,traceInfo})=>{
       console.log("Show modal for traceId:", traceInfo?.traceId);
-       log.error(`Error handler called: in handleClick ${error?.message}`);
+       log.error(`Error handler called: in handleClick ${error.message}`, {},error);
     },false);
   }
 
